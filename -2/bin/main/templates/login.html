@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url("https://images.unsplash.com/photo-1524985069026-dd778a71c7b4") no-repeat center center/cover;
+            height: 100vh;
+        }
+
+        .overlay {
+            background-color: rgba(0,0,0,0.7);
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background-color: rgba(0,0,0,0.85);
+            padding: 40px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #e50914;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #f6121d;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .volver {
+            margin-top: 15px;
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .volver:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay">
+    <div class="login-box">
+
+        <h1>MEGACINE 🎬</h1>
+
+        <form action="/login" method="post">
+            <input type="text" name="usuario" placeholder="Usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+
+            <button type="submit">Ingresar</button>
+        </form>
+
+     
+        <p class="error" th:if="${error}" th:text="${error}"></p>
+
+        <a href="/cartelera" class="volver">Ver cartelera 🎥</a>
+
+    </div>
+</div>
+
+</body>
+</html>

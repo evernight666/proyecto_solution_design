@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MegaCine</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial;
+        }
+
+        .overlay {
+            background-color: rgba(0,0,0,0.75);
+            min-height: 100vh;
+            text-align: center;
+            color: white;
+            padding-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 40px;
+            color: #e50914;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .subtitulo {
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #ffcc00;
+        }
+
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            background: #222;
+            border-radius: 10px;
+            width: 220px;
+            padding: 10px;
+            box-shadow: 0px 0px 10px rgba(255,255,255,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 20px rgba(255,255,255,0.4);
+        }
+
+        img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .titulo {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #ffcc00;
+        }
+
+        .director {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .extra {
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .combo {
+            margin-top: 8px;
+            background: #111;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .precio {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        /* PROMOS */
+        .promos {
+            margin-top: 30px;
+        }
+
+        .promos h3 {
+            color: #ffcc00;
+        }
+
+        .promos-contenedor {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .promo-card {
+            background: #222;
+            padding: 15px;
+            border-radius: 10px;
+            width: 200px;
+            box-shadow: 0px 0px 10px rgba(255,255,255,0.2);
+            transition: transform 0.3s;
+        }
+
+        .promo-card:hover {
+            transform: scale(1.05);
+        }
+
+        .promo-card span {
+            color: #e50914;
+            font-weight: bold;
+        }
+
+        /* NORMAS */
+        .normas {
+            margin-top: 30px;
+            background: #111;
+            padding: 15px;
+            border-radius: 10px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .volver {
+            margin-top: 20px;
+        }
+
+        a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="overlay">
+
+    <!-- LOGO -->
+    <div class="logo">🎬 MegaCine</div>
+    <div class="subtitulo">La mejor experiencia de cine 🍿</div>
+
+    <h2>Cartelera de Películas</h2>
+
+    <div class="contenedor">
+
+        <div class="card" th:each="p : ${peliculas}">
+
+            <img th:src="${p.imagen}">
+
+            <div class="titulo" th:text="${p.nombre}"></div>
+
+            <div class="director">
+                Dir: <span th:text="${p.director}"></span>
+            </div>
+
+            <div class="extra" style="color: gold;">
+                ⭐⭐⭐⭐☆
+            </div>
+
+            <div class="extra" style="color:#aaa;">
+                3:00pm - 6:00pm - 9:00pm
+            </div>
+
+            <div class="combo">
+                🍿 Combo cine<br>
+                <span class="precio">S/ 15.00</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PROMOCIONES -->
+    <div class="promos">
+
+        <h3>🎟️ Promociones</h3>
+
+        <div class="promos-contenedor">
+
+            <div class="promo-card">
+                💑 Promo Pareja<br>
+                2 entradas + combo 🍿<br>
+                <span>S/ 25.00</span>
+            </div>
+
+            <div class="promo-card">
+                👨‍👩‍👧 Promo Familiar<br>
+                4 entradas + combo grande 🍿<br>
+                <span>S/ 45.00</span>
+            </div>
+
+            <div class="promo-card">
+                🎓 Promo Estudiantes<br>
+                Entrada + bebida<br>
+                <span>S/ 10.00</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- NORMAS -->
+    <div class="normas">
+        <h3 style="color:#ffcc00;">📢 Normas del Cine</h3>
+        <p>🚫 Prohibido ingresar con mascotas</p>
+        <p>📵 Apagar celulares durante la función</p>
+        <p>🍿 No ingresar alimentos externos</p>
+        <p>🚭 Prohibido fumar</p>
+    </div>
+
+    <div class="volver">
+        <a href="/">⬅ Volver al inicio</a>
+    </div>
+
+</div>
+
+</body>
+</html>

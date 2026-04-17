@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Película</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba") no-repeat center center/cover;
+            height: 100vh;
+        }
+
+        .overlay {
+            background-color: rgba(0,0,0,0.7);
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-box {
+            background-color: rgba(0,0,0,0.85);
+            padding: 40px;
+            border-radius: 10px;
+            width: 320px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #e50914;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #f6121d;
+        }
+
+        .volver {
+            margin-top: 15px;
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .volver:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="overlay">
+    <div class="form-box">
+
+        <h1>Editar 🎬</h1>
+
+        <form th:action="@{/actualizarPelicula}" method="post">
+
+            <!-- ID -->
+            <input type="hidden" name="id" th:value="${pelicula.id}">
+
+            <input type="text" name="nombre" placeholder="Nombre"
+                   th:value="${pelicula.nombre}" required>
+
+            <input type="text" name="director" placeholder="Director"
+                   th:value="${pelicula.director}" required>
+
+            <input type="text" name="imagen" placeholder="URL de imagen"
+                   th:value="${pelicula.imagen}" required>
+
+            <button type="submit">Actualizar</button>
+
+        </form>
+
+        <a href="/peliculas" class="volver">⬅ Volver</a>
+
+    </div>
+</div>
+
+</body>
+</html>

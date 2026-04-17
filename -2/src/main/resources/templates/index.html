@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MegaCine</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: url("https://images.unsplash.com/photo-1497032205916-ac775f0649ae") no-repeat center center/cover;
+            height: 100vh;
+            color: white;
+        }
+
+        .overlay {
+            background: rgba(0,0,0,0.8);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contenedor {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.6);
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 55px;
+            color: #e50914;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+
+        .botones {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .boton {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #e50914, #ff2a2a);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .boton:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px #e50914;
+        }
+
+        .integrantes-box {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .integrantes-box strong {
+            color: #ffcc00;
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+    <div class="contenedor">
+
+        <h1>MEGACINE 🎬</h1>
+
+        <p>Bienvenido al sistema de gestión de cartelera</p>
+
+        <div class="botones">
+            <a href="/cartelera" class="boton">Ver cartelera 🎥</a>
+            <a href="/login" class="boton">Admin 🔐</a>
+        </div>
+
+        <div class="integrantes-box">
+            <strong>Integrantes</strong>
+            <p>• Ramos Chipana, Arnol Jeremy</p>
+            <p>• Zarate Chumpitaz, Jose Aryan</p>
+            <p>• Aguirre Rojas, Joan Manuel</p>
+            <p>• Pampamallco Miranda, Juan Carlos</p>
+            <p>• Palaco Montesinos, Saul Edmundo</p>
+            <p>• Velasquez Mamani, Yoel Javier</p>
+            <p>• Sayago Rios, Heber Yoban</p>
+            <p>• Cardenas Medina, Daniel</p>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Panel Admin</title>
+
+    <style>
+        body {
+            background-color: #141414;
+            color: white;
+            font-family: Arial;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #e50914;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #1f1f1f;
+        }
+
+        .top-bar h2 {
+            margin: 0;
+            color: #e50914;
+        }
+
+        .menu {
+            display: flex;
+            gap: 15px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: #e50914;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #f6121d;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #1f1f1f;
+            padding: 10px;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .acciones {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <h2>Admin 🎬</h2>
+
+    <div class="menu">
+        <a href="/api/peliculas" target="_blank">API JSON 🔧</a>
+        <a href="/cartelera">Ver cartelera 🎥</a>
+        <a href="/logout">Cerrar sesión 🔓</a>
+    </div>
+</div>
+
+<h1>Gestión de Películas</h1>
+
+<form action="/guardarPelicula" method="post">
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="director" placeholder="Director" required>
+    <input type="text" name="imagen" placeholder="URL imagen" required>
+    <button type="submit">Agregar</button>
+</form>
+
+<div class="grid">
+
+    <div class="card" th:each="p : ${peliculas}">
+        
+        <img th:src="${p.imagen}">
+
+        <h3 th:text="${p.nombre}"></h3>
+
+        <p th:text="${p.director}"></p>
+
+        <div class="acciones">
+            <a th:href="@{/editarPelicula/{id}(id=${p.id})}">✏️</a>
+            |
+            <a th:href="@{/eliminarPelicula/{id}(id=${p.id})}">❌</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
