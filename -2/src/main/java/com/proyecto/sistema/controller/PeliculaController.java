@@ -111,7 +111,7 @@ public class PeliculaController {
             session.setAttribute("admin", true);
             return "redirect:/peliculas";
         } else {
-            model.addAttribute("error", "Datos incorrectos");
+            model.addAttribute("error", "Dato		s incorrectos");
             return "login";
         }
     }

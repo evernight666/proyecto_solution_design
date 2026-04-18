@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Confirmación - MegaCine</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url("https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c") no-repeat center center/cover;
+            height: 100vh;
+            color: white;
+        }
+
+        .overlay {
+            background-color: rgba(0,0,0,0.85);
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ticket {
+            background-color: #1f1f1f;
+            padding: 30px;
+            border-radius: 15px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0,0,0,0.6);
+            position: relative;
+        }
+
+        h1 {
+            color: #e50914;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        .info strong {
+            color: white;
+        }
+
+        .line {
+            border-top: 1px dashed #555;
+            margin: 15px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #e50914;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #f6121d;
+        }
+
+        .emoji {
+            font-size: 40px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="overlay">
+
+    <div class="ticket">
+
+        <div class="emoji">🎟️</div>
+
+        <h1>Reserva Confirmada</h1>
+
+        <div class="line"></div>
+
+        <p class="info"><strong>Cliente:</strong> <span th:text="${reserva.cliente}"></span></p>
+        <p class="info"><strong>Película:</strong> <span th:text="${reserva.pelicula}"></span></p>
+        <p class="info"><strong>Horario:</strong> <span th:text="${reserva.horario}"></span></p>
+        <p class="info"><strong>Asiento:</strong> <span th:text="${reserva.asiento}"></span></p>
+
+        <div class="line"></div>
+
+        <a href="/cartelera" class="btn">Volver a cartelera 🎬</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reservar - MegaCine</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: url("https://images.unsplash.com/photo-1524985069026-dd778a71c7b4") no-repeat center/cover;
+            color: white;
+        }
+
+        .overlay {
+            background: rgba(0,0,0,0.9);
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #e50914;
+            font-size: 40px;
+        }
+
+        .form-box {
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        input, select {
+            padding: 10px;
+            margin: 8px;
+            border-radius: 5px;
+            border: none;
+            width: 80%;
+        }
+
+        button {
+            padding: 12px;
+            background: #e50914;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 85%;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #ff1e1e;
+        }
+
+        /* 🎬 INPUT PELÍCULA */
+        .pelicula-box input {
+            background: transparent;
+            border: none;
+            color: #ffcc00;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 🎟️ SALA */
+        .pantalla {
+            margin: 20px auto;
+            width: 60%;
+            background: #fff;
+            color: #000;
+            padding: 5px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .sala {
+            display: grid;
+            grid-template-columns: repeat(10, 40px);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .asiento {
+            width: 40px;
+            height: 40px;
+            background: #444;
+            border-radius: 5px;
+            cursor: pointer;
+            line-height: 40px;
+            font-size: 12px;
+        }
+
+        .ocupado {
+            background: red;
+            cursor: not-allowed;
+        }
+
+        .seleccionado {
+            background: #00c853;
+        }
+
+        #precio {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #ffcc00;
+        }
+
+        .leyenda {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .leyenda span {
+            margin: 0 10px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+    <h1>🎟️ Reservar Entrada</h1>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <div class="form-box">
+
+        <form action="/guardarReserva" method="post">
+
+            <!-- CLIENTE -->
+            <input type="text" name="cliente" placeholder="Tu nombre" required>
+
+            <!-- 🎬 PELÍCULA EDITABLE -->
+            <div class="pelicula-box">
+                🎬 
+                <input type="text" name="pelicula"
+                       th:value="${pelicula}"
+                       placeholder="Escribe la película"
+                       required>
+            </div>
+
+            <!-- HORARIO -->
+            <select name="horario" required>
+                <option value="">Selecciona horario</option>
+                <option>3:00pm</option>
+                <option>6:00pm</option>
+                <option>9:00pm</option>
+            </select>
+
+            <!-- ASIENTO OCULTO -->
+            <input type="hidden" name="asiento" id="asientoInput">
+
+            <!-- PANTALLA -->
+            <div class="pantalla">PANTALLA</div>
+
+            <!-- SALA -->
+            <div class="sala" id="sala"></div>
+
+            <!-- PRECIO -->
+            <div id="precio">Precio: S/ 0</div>
+
+            <!-- LEYENDA -->
+            <div class="leyenda">
+                <span>⬛ Libre</span>
+                <span>🟥 Ocupado</span>
+                <span>🟩 Seleccionado</span>
+            </div>
+
+            <button type="submit">Confirmar Reserva</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script th:inline="javascript">
+    const sala = document.getElementById("sala");
+    const asientoInput = document.getElementById("asientoInput");
+    const precioText = document.getElementById("precio");
+
+    let ocupados = [];
+
+    let data = [[${ocupados}]];
+
+    data.forEach(r => {
+        ocupados.push(r.asiento);
+    });
+
+    for(let i = 1; i <= 60; i++) {
+
+        let div = document.createElement("div");
+        div.classList.add("asiento");
+        div.innerText = i;
+
+        if(ocupados.includes(i)) {
+            div.classList.add("ocupado");
+        } else {
+
+            div.onclick = function() {
+
+                document.querySelectorAll(".asiento").forEach(a => {
+                    a.classList.remove("seleccionado");
+                });
+
+                div.classList.add("seleccionado");
+
+                asientoInput.value = i;
+
+                let precio = 0;
+
+                if(i <= 20) precio = 10;
+                else if(i <= 40) precio = 15;
+                else precio = 20;
+
+                precioText.innerText = "Precio: S/ " + precio;
+            }
+        }
+
+        sala.appendChild(div);
+    }
+</script>
+
+</body>
+</html>
