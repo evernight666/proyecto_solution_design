@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login - MegaCine</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: url("https://images.unsplash.com/photo-1524985069026-dd778a71c7b4") no-repeat center/cover;
+            height: 100vh;
+        }
+
+        .overlay {
+            background: rgba(0,0,0,0.85);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background: rgba(20,20,20,0.95);
+            padding: 40px;
+            border-radius: 12px;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.8);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #e50914;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: none;
+            background: #333;
+            color: white;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            background: #444;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #e50914;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #f6121d;
+            transform: scale(1.03);
+        }
+
+        .error {
+            color: #ff4d4d;
+            margin-top: 10px;
+        }
+
+        .link {
+            margin-top: 15px;
+            display: block;
+            color: #ffcc00;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .link:hover {
+            color: white;
+        }
+
+        .logo {
+            font-size: 28px;
+            color: #e50914;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+    <div class="login-box">
+
+        <div class="logo">🎬 MegaCine</div>
+
+        <h1>Iniciar Sesión</h1>
+
+        <form action="/loginUsuario" method="post">
+
+            <input type="email" name="correo" placeholder="Correo" required>
+
+            <input type="password" name="password" placeholder="Contraseña" required>
+
+            <button type="submit">Ingresar</button>
+
+        </form>
+
+        <p class="error" th:if="${error}" th:text="${error}"></p>
+
+        <a href="/registro" class="link">¿No tienes cuenta? Crear cuenta</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

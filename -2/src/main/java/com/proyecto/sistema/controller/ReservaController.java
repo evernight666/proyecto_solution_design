@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.proyecto.sistema.model.Reserva;
+import com.proyecto.sistema.model.Usuario;
 import com.proyecto.sistema.repository.ReservaRepository;
 
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -20,7 +22,13 @@ public class ReservaController {
     @GetMapping("/reservar")
     public String formulario(
             @RequestParam(name = "pelicula", required = false) String pelicula,
-            Model model) {
+            Model model,
+            HttpSession session) {
+
+        // 🔒 PROTEGER
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/loginUsuario";
+        }
 
         if (pelicula == null || pelicula.isEmpty()) {
             pelicula = "No seleccionada";
@@ -37,11 +45,19 @@ public class ReservaController {
     // 👉 GUARDAR RESERVA
     @PostMapping("/guardarReserva")
     public String guardar(
-            @RequestParam(name = "cliente") String cliente,
             @RequestParam(name = "pelicula") String pelicula,
             @RequestParam(name = "horario") String horario,
             @RequestParam(name = "asiento") int asiento,
-            Model model) {
+            Model model,
+            HttpSession session) {
+
+        // 🔒 PROTEGER
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/loginUsuario";
+        }
+
+        // 👤 OBTENER USUARIO LOGUEADO
+        Usuario u = (Usuario) session.getAttribute("usuario");
 
         // 🔒 VALIDAR SI YA EXISTE
         boolean ocupado = repo.existsByAsientoAndHorario(asiento, horario);
@@ -60,7 +76,7 @@ public class ReservaController {
         else precio = 20;
 
         Reserva reserva = new Reserva();
-        reserva.setCliente(cliente);
+        reserva.setCliente(u.getNombre()); // 🔥 AUTOMÁTICO
         reserva.setPelicula(pelicula);
         reserva.setHorario(horario);
         reserva.setAsiento(asiento);
@@ -73,12 +89,10 @@ public class ReservaController {
         return "confirmacion";
     }
 
-    // 🔥 👉 OPCIONAL: API JSON (SIN HTML)
+    // 🔥 API JSON
     @GetMapping("/api/reservas")
     @ResponseBody
     public List<Reserva> obtenerReservas() {
         return repo.findAll();
     }
-    
-    
 }
